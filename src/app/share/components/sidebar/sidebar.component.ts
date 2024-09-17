@@ -20,6 +20,7 @@ export interface MenuItem {
   selector: 'app-sidebar',
   standalone: true,
   imports: [CommonModule, MaterialModule, RouterModule, HeaderComponent, FooterComponent, DividerModule],
+  providers: [],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
@@ -34,13 +35,13 @@ export class SidebarComponent implements OnInit {
       subItems: []
     },
     {
-      label: 'Management',
+      label: 'Administración',
       icon: 'pi-spin pi-cog',
       expandable: true,
       expanded: false,
       subItems: [
         {
-          label: 'Users',
+          label: 'Usuarios',
           icon: 'pi-user',
           route: '/management/users',
           subItems: [],

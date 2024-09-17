@@ -7,6 +7,7 @@ import {environment} from "../../../environments/environment";
 export interface User{
   user_id : string;
   login : string;
+  nombre: string;
   correo : string;
 }
 export interface LoginResponse {

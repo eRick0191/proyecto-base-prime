@@ -13,29 +13,33 @@ export class UsersService {
 
   public getUsers(): Observable<any> {
 
-    return this._http.get('usuarios', {
+    return this._http.get('encuestas', {
       headers: {noLoading: 'true'}
     });
   }
 
+  public destinatarios(): Observable<any> {
+    return this._http.get('encuestas/destinatarios', {
+      headers: {noLoading: 'true'}
+    });
+  }
 
   public create(body: any): Observable<any> {
-    return this._http.post('usuarios', body);
+    return this._http.post('encuestas', body);
 
   }
 
   public show(id: number): Observable<any> {
-    return this._http.get(`usuarios/${id}`);
+    return this._http.get(`encuestas/${id}`);
   }
-
 
 
   public update(id: number, body: any): Observable<any> {
-    return this._http.put(`usuarios/${id}`, body);
+    return this._http.put(`encuestas/${id}`, body);
   }
 
   public delete(id: number): Observable<any> {
-    return this._http.delete(`usuarios/${id}`);
+    return this._http.delete(`encuestas/${id}`);
   }
 
 

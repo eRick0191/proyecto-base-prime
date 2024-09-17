@@ -11,7 +11,4 @@ import {ToastModule} from "primeng/toast";
 })
 export class ModalAlertComponent {
 
-  confirm(value: any) {
-    console.log(value)
-  }
 }

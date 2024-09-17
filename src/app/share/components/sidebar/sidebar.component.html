@@ -10,7 +10,8 @@
               <img *ngIf="!isShowing" src="favicon.ico" alt="logo.png" width="52" height="38" class="">
               <span class="title" *ngIf="isShowing"> Gastiganto </span>
             </div>
-          </mat-list-item><br>
+          </mat-list-item>
+          <br>
           <!-- first level -->
           <ng-container *ngFor="let menuItem of menuItems">
             <mat-list-item (click)="toggleMenuItem(menuItem)" [routerLink]="menuItem.route">
@@ -58,7 +59,7 @@
       <mat-sidenav-content class="mat-drawer-content">
         <app-header></app-header>
         <div class="p-3 m-3 content-height">
-            <router-outlet></router-outlet>
+          <router-outlet></router-outlet>
         </div>
         <app-footer></app-footer>
       </mat-sidenav-content>

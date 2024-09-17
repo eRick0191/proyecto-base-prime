@@ -13,7 +13,6 @@ import {UsersEditComponent} from "./users/users-edit/users-edit.component";
 const routes: Routes = [
   {
     path: 'auth',
-    providers: [AuthService],
     children: [
       {
         path: 'login',

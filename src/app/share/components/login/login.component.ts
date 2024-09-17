@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     let controls = this.loginForm.controls;
     if (this.loginForm.invalid) {
       Object.keys(controls).forEach(controlName => {
-        controls[controlName].markAsTouched();
+        controls[controlName].markAsDirty();
       })
 
       return;
@@ -59,6 +59,6 @@ export class LoginComponent implements OnInit {
     if (!control) {
       return false;
     }
-    return control.hasError(validationType) && (control.dirty || control.touched);
+    return control.hasError(validationType) && (control.dirty);
   }
 }

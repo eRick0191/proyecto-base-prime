@@ -9,14 +9,19 @@ import {Button, ButtonDirective} from "primeng/button";
 import {PasswordModule} from "primeng/password";
 import {FormsModule} from "@angular/forms";
 import {UsersService} from "../users.service";
-import {PrimeNGConfig} from "primeng/api";
+import {ConfirmationService, MessageService, PrimeNGConfig} from "primeng/api";
 import {Ripple} from "primeng/ripple";
 import {RouterLink} from "@angular/router";
+import {ModalAlertComponent} from "../../../share/components/modals/modal-alert/modal-alert.component";
+import {MatTooltip} from "@angular/material/tooltip";
+import {TooltipModule} from "primeng/tooltip";
+import {LoadingService} from "../../../share/services/loading.service";
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, TableModule, TagModule, IconFieldModule, InputIconModule, InputTextModule, ButtonDirective, PasswordModule, FormsModule, Button, Ripple, RouterLink],
+  imports: [CommonModule, TableModule, TagModule, IconFieldModule, InputIconModule, InputTextModule, ButtonDirective, PasswordModule, FormsModule, Button, Ripple, RouterLink, ModalAlertComponent, MatTooltip, TooltipModule],
+  providers: [ConfirmationService, MessageService, LoadingService],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
 })
@@ -27,31 +32,75 @@ export class UsersComponent implements OnInit {
   searchValue: string | undefined
   filterHidden = true;
 
-  constructor(private _userService: UsersService, private primeConfig: PrimeNGConfig) {
+  constructor(
+    private _userService: UsersService,
+    private primeConfig: PrimeNGConfig,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
+    private _loading: LoadingService) {
+    this.primeConfig.ripple = true;
   }
 
   ngOnInit() {
-    this.primeConfig.ripple = true;
-    this._userService.getUsers().subscribe((res: any) => {
-      this.loading = false;
-      this.users = res.data;
-    })
+    this.getUser();
+
     this.columns = [
-      {field: 'nombre', header: 'Name', width: 25},
-      {field: 'apellido_paterno', header: 'Last Name', width: 20},
-      {field: 'email', header: 'Email', width: 25},
-      {field: 'telefono', header: 'Phone number', width: 20},
+      {field: 'titulo', header: 'Título', width: 18},
+      {field: 'descripcion', header: 'Descripción', width: 18},
+      {field: 'destinatario', header: 'Destinatario', width: 18},
+      {field: 'ponderacion_baja', header: 'Criterio mínimo', width: 18},
+      {field: 'ponderacion_alta', header: 'Criterio máximo', width: 18},
     ];
 
+  }
+
+  getUser() {
+    this._userService.getUsers().subscribe((res: any) => {
+      this.loading = false;
+      this.users = res;
+    })
   }
 
   event(ev: any) {
     return ev.value;
   }
 
-  clearTable(table: Table){
+  clearTable(table: Table) {
     table.clear();
     this.searchValue = '';
+  }
+
+  delete(event: Event, user: any) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: '¿Está seguro de eliminar el usuario ' + user.nombre + '?',
+      header: 'Eliminar Usuario',
+      acceptButtonStyleClass: "p-button-text p-button-text",
+      rejectButtonStyleClass: "p-button-danger p-button-text",
+      acceptLabel: "Sí",
+
+      accept: () => {
+        this._userService.delete(user.id)
+          .subscribe({
+            next: any => {
+              this.messageService.add({
+                severity: 'info',
+                summary: 'Eliminado',
+                detail: 'El usuario ha sido eliminado con éxito.'
+              });
+              this.getUser();
+            },
+            error: any => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Ocurrió un error al eliminar el usuario.'
+              });
+            }
+
+          });
+      }
+    });
   }
 
 }

@@ -9,8 +9,26 @@
     </ng-template>
     <ng-template pTemplate="end">
       <div class="flex align-items-center cursor-pointer gap-2">
-        <p-avatar (click)="closeCallback()" image="assets/raul.png" shape="circle" />
+        <p-avatar [style]="{'background-color': '#343a40', 'color': 'white'}" (click)="op.toggle($event)"
+                  shape="circle" icon="pi pi-user"/>
       </div>
+      <p-overlayPanel #op>
+        <div class="flex flex-column gap-3 w-25rem color-secundario border-round-top" >
+          <div>
+            <div class="menu-container text-center flex-column">
+              <div class="flex align-items-center">
+                <div class=" p-3">
+                  <div class="cuadrito">{{ username.slice(0, 1) }}</div>
+                </div>
+                <h3 class="text-white p-3 mt-4">{{ username }}</h3>
+              </div>
+            </div>
+            <div class="bg-white text-white p-2">
+              <button pButton class="btn btn-primary" (click)="logOut()">Cerrar sesión</button>
+            </div>
+          </div>
+        </div>
+      </p-overlayPanel>
     </ng-template>
   </p-menubar>
 </div>
