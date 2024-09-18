@@ -9,6 +9,7 @@ import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
 import {UsersService} from "../users.service";
 import {DropdownModule} from "primeng/dropdown";
+import {MatInput} from "@angular/material/input";
 
 @Component({
   selector: 'app-users-edit',
@@ -20,7 +21,8 @@ import {DropdownModule} from "primeng/dropdown";
     InputTextModule,
     CommonModule,
     ReactiveFormsModule,
-    DropdownModule
+    DropdownModule,
+    MatInput
   ],
   templateUrl: './users-edit.component.html',
   styleUrl: './users-edit.component.css'

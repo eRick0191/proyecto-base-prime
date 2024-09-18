@@ -53,8 +53,7 @@ span{
 
 /*Sidebar style*/
 .mat-drawer {
-
-  background-color: #343a40;
+  background-color: var(--color-primary);
 }
 
 .custom-border{
