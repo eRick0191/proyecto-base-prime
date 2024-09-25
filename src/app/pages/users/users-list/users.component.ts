@@ -31,6 +31,7 @@ export class UsersComponent implements OnInit {
   loading: boolean = true;
   searchValue: string | undefined
   filterHidden = true;
+  dataSource = ['titulo', 'descripcion', 'destinatario', 'ponderacion_baja', 'ponderacion_alta'];
 
   constructor(
     private _userService: UsersService,
@@ -73,7 +74,7 @@ export class UsersComponent implements OnInit {
   delete(event: Event, user: any) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
-      message: '¿Está seguro de eliminar el usuario ' + user.nombre + '?',
+      message: '¿Está seguro de eliminar el usuario ' + user.titulo + '?',
       header: 'Eliminar Usuario',
       acceptButtonStyleClass: "p-button-text p-button-text",
       rejectButtonStyleClass: "p-button-danger p-button-text",

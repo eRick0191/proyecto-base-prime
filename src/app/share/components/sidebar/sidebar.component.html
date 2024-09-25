@@ -44,9 +44,8 @@
                       <div class="menu-item-container">
                         <i class="pi" [ngClass]="subsubItem.icon" style="font-size: 1rem"></i>
                         <span class="full-width colorletra">{{ subsubItem.label }}</span>
-                        <i *ngIf="subsubItem.expandable" class="pi"
-                           [ngClass]="subsubItem.expanded ? 'pi-chevron-up' : 'pi-chevron-down'"
-                           style="font-size: .5rem"></i>
+                        <i *ngIf="subsubItem.expandable" class="pi" style="font-size: .5rem"
+                           [ngClass]="subsubItem.expanded ? 'pi-chevron-up' : 'pi-chevron-down'"></i>
                       </div>
                     </mat-list-item>
                   </ng-container>

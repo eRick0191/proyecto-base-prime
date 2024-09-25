@@ -129,7 +129,6 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(colors)
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
