@@ -9,6 +9,8 @@ import {FloatLabelModule} from "primeng/floatlabel";
 import {InputTextModule} from "primeng/inputtext";
 import {UsersService} from "../users.service";
 import {DropdownModule} from "primeng/dropdown";
+import {MatInput} from "@angular/material/input";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-users-edit',
@@ -20,8 +22,10 @@ import {DropdownModule} from "primeng/dropdown";
     InputTextModule,
     CommonModule,
     ReactiveFormsModule,
-    DropdownModule
+    DropdownModule,
+    MatInput
   ],
+  providers: [MessageService],
   templateUrl: './users-edit.component.html',
   styleUrl: './users-edit.component.css'
 })
@@ -43,6 +47,7 @@ export class UsersEditComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _location: Location,
     private fb: FormBuilder,
+    private messageService: MessageService,
   ) {
     this.subscriptions.push(
       this._activatedRoute.params.subscribe(params => {
@@ -55,7 +60,6 @@ export class UsersEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.form.controls)
     if (!this.isCreateMode) {
       this._userService.show(this.id)
         .subscribe((res: any) => {
@@ -89,12 +93,22 @@ export class UsersEditComponent implements OnInit {
 
   addUsuario(user: any) {
     this._userService.create(user).subscribe(_ => {
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Éxito',
+        detail: 'El usuario ha sido creado con éxito.'
+      });
       this.backRoute()
     });
   }
 
   updateUsuario(id: any, user: any) {
     this._userService.update(id, user).subscribe(_ => {
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Éxito',
+        detail: 'El usuario ha sido actualizado con éxito.'
+      });
       this.backRoute()
     });
   }

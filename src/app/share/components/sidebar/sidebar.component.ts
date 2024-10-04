@@ -1,5 +1,4 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
-import {ShareModule} from "../../share.module";
 import {RouterModule} from "@angular/router";
 import {HeaderComponent} from "../header/header.component";
 import {FooterComponent} from "../footer/footer.component";
@@ -82,3 +81,4 @@ export class SidebarComponent implements OnInit {
   }
 
 }
+

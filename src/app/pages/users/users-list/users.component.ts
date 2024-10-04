@@ -16,11 +16,12 @@ import {ModalAlertComponent} from "../../../share/components/modals/modal-alert/
 import {MatTooltip} from "@angular/material/tooltip";
 import {TooltipModule} from "primeng/tooltip";
 import {LoadingService} from "../../../share/services/loading.service";
+import {NgxPermissionsModule} from "ngx-permissions";
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, TableModule, TagModule, IconFieldModule, InputIconModule, InputTextModule, ButtonDirective, PasswordModule, FormsModule, Button, Ripple, RouterLink, ModalAlertComponent, MatTooltip, TooltipModule],
+  imports: [CommonModule, TableModule, TagModule, IconFieldModule, InputIconModule, InputTextModule, ButtonDirective, PasswordModule, FormsModule, Button, Ripple, RouterLink, ModalAlertComponent, MatTooltip, TooltipModule, NgxPermissionsModule],
   providers: [ConfirmationService, MessageService, LoadingService],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
@@ -31,6 +32,7 @@ export class UsersComponent implements OnInit {
   loading: boolean = true;
   searchValue: string | undefined
   filterHidden = true;
+  dataSource = ['titulo', 'descripcion', 'destinatario', 'ponderacion_baja', 'ponderacion_alta'];
 
   constructor(
     private _userService: UsersService,
@@ -47,7 +49,7 @@ export class UsersComponent implements OnInit {
     this.columns = [
       {field: 'titulo', header: 'Título', width: 18},
       {field: 'descripcion', header: 'Descripción', width: 18},
-      {field: 'destinatario', header: 'Destinatario', width: 18},
+      {field: 'destinatario', header: 'Destinatario', width: 17},
       {field: 'ponderacion_baja', header: 'Criterio mínimo', width: 18},
       {field: 'ponderacion_alta', header: 'Criterio máximo', width: 18},
     ];
@@ -73,7 +75,7 @@ export class UsersComponent implements OnInit {
   delete(event: Event, user: any) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
-      message: '¿Está seguro de eliminar el usuario ' + user.nombre + '?',
+      message: '¿Está seguro de eliminar el usuario ' + user.titulo + '?',
       header: 'Eliminar Usuario',
       acceptButtonStyleClass: "p-button-text p-button-text",
       rejectButtonStyleClass: "p-button-danger p-button-text",

@@ -3,7 +3,11 @@ import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {environment} from "../../../environments/environment";
-
+export interface Role{
+  name : string;
+  slug : string;
+  permissions: Permissions;
+}
 export interface User{
   user_id : string;
   login : string;
@@ -12,7 +16,12 @@ export interface User{
 }
 export interface LoginResponse {
   token: string;
-  user : User
+  user : User;
+  role: Role;
+}
+
+interface Permissions {
+  [key: string]: boolean;
 }
 
 @Injectable({
@@ -65,5 +74,9 @@ export class AuthService {
 
   getUser(): User | null  {
     return this.getStorage()?.user || null;
+  }
+
+  getPermissions(): Permissions | undefined{
+    return this.getStorage()?.role.permissions;
   }
 }

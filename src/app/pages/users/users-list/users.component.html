@@ -2,7 +2,7 @@
   <div class="header flex justify-content-between align-items-center">
     <span class="header-title">Usuarios</span>
     <div>
-      <button pButton pRipple icon="pi pi-user-plus" label="Add New" [routerLink]="['add']"
+      <button  *ngxPermissionsOnly="'movil.cat_estatus.create'" pButton pRipple icon="pi pi-user-plus" label="Add New" [routerLink]="['add']"
               class="p-element custom-button w-full sm:w-auto flex-order-0 sm:flex-order-2">
         <i class="p-button-icon pi pi-user-plus" aria-hidden="true"></i>
         <span class="p-button-label pl-2">Nuevo usuario</span>
@@ -22,7 +22,7 @@
       [loading]="loading"
       [paginator]="true"
       [showFirstLastIcon]="false"
-      [globalFilterFields]="['nombre', 'apellido_paterno', 'email', 'telefono']"
+      [globalFilterFields]="dataSource"
       [tableStyle]="{ 'min-width': '75rem' }"
       paginatorStyleClass="text-end"
       responsiveLayout="stack"
@@ -49,8 +49,8 @@
               [pSortableColumn]="col.field">{{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
-          <th class="cursor-pointer" (click)="filterHidden = !filterHidden">Acciones <span class="pi"
-              [ngClass]="filterHidden ? 'pi-filter' : 'pi-filter-fill'"></span>
+          <th class="cursor-pointer" (click)="filterHidden = !filterHidden">Acciones <i class="pi"
+              [ngClass]="filterHidden ? 'pi-filter' : 'pi-filter-fill'"></i>
           </th>
         </tr>
         <tr [hidden]="filterHidden">
@@ -58,8 +58,8 @@
             <p-columnFilter
               type="text"
               [field]="col.field"
-              [placeholder]="'Search by ' + col.header"
-              [ariaLabel]="'Filter ' + col.header"/>
+              [placeholder]="'Burcar ' + col.header"
+              [ariaLabel]="'Filtro ' + col.header"/>
           </th>
           <th></th>
         </tr>
