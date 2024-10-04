@@ -5,8 +5,6 @@ import {FooterComponent} from "../footer/footer.component";
 import {DividerModule} from "primeng/divider";
 import {MaterialModule} from "../../material/material.module";
 import {CommonModule} from "@angular/common";
-import {NgxPermissionsService} from "ngx-permissions";
-import {AuthService} from "../../services/auth.service";
 
 export interface MenuItem {
   label: string;
@@ -52,8 +50,7 @@ export class SidebarComponent implements OnInit {
 
   ];
 
-  constructor(private permissionsService: NgxPermissionsService,
-              private _authService: AuthService) {
+  constructor() {
   }
 
   @HostListener('window:resize', ['$event'])
@@ -63,7 +60,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkMobileView();
-    this.cargarPermisos();
   }
 
   checkMobileView() {
@@ -82,20 +78,6 @@ export class SidebarComponent implements OnInit {
 
   mouseleave() {
     this.isShowing = false;
-  }
-
-  cargarPermisos() {
-
-
-    const perms = this._authService.getPermissions();
-    this.permissionsService.flushPermissions();
-    console.log(perms)
-    Object.keys(perms).forEach(key => {
-      if (perms[key]) {
-        this.permissionsService.addPermission(key);
-      }
-    });
-
   }
 
 }

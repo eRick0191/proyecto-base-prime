@@ -76,7 +76,7 @@ export class AuthService {
     return this.getStorage()?.user || null;
   }
 
-  getPermissions(): Permissions {
-    return this.getStorage()!.role.permissions;
+  getPermissions(): Permissions | undefined{
+    return this.getStorage()?.role.permissions;
   }
 }

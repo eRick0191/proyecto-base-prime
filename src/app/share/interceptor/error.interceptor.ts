@@ -81,7 +81,7 @@ export const errorInterceptor: HttpInterceptorFn = (request, next) => {
 function unauthorized(err: HttpErrorResponse, auth: any) {
 
   const headerMsg: string = err.error.message || 'Error';
-  let errorMsg: string = err.error.error;
+  const errorMsg: string = err.error.error;
 
   if (errorMsg != "Usuario y/o contraseña incorrectos") {
     auth.logout();
@@ -96,14 +96,14 @@ function unauthorized(err: HttpErrorResponse, auth: any) {
 
 function forbidden(err: HttpErrorResponse) {
   const headerMsg = err.error.message || 'Error';
-  let errorMsg = err.error.error;
+  const errorMsg = err.error.error;
 
   return {headerMsg, errorMsg};
 }
 
 function notFound(err: HttpErrorResponse) {
   const headerMsg = err.error.message || 'Error';
-  let errorMsg = err.error.error;
+  const errorMsg = err.error.error;
 
   return {headerMsg, errorMsg};
 }
@@ -119,7 +119,7 @@ function unprocessableEntity(err: HttpErrorResponse) {
 
 function tooManyRequests(err: HttpErrorResponse) {
   const headerMsg = 'Error';
-  let errorMsg = 'Demasiados intentos. Espere un momento.';
+  const errorMsg = 'Demasiados intentos. Espere un momento.';
 
   return {headerMsg, errorMsg};
 }
